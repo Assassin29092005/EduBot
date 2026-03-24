@@ -8,7 +8,7 @@ function MessageBubble({ text, sender, timestamp }) {
           <span role="img" aria-label="bot">🎓</span>
         </div>
       )}
-      <div>
+      <div className="message-content">
         <div className={`message-bubble ${sender}`}>{text}</div>
         {timestamp && <div className="message-timestamp">{timestamp}</div>}
       </div>
