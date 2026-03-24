@@ -11,10 +11,18 @@ function ChatWindow({ messages, isLoading }) {
   return (
     <div className="chat-window">
       {messages.map((msg, index) => (
-        <MessageBubble key={index} text={msg.text} sender={msg.sender} />
+        <MessageBubble
+          key={index}
+          text={msg.text}
+          sender={msg.sender}
+          timestamp={msg.timestamp}
+        />
       ))}
       {isLoading && (
         <div className="message-row bot">
+          <div className="bot-avatar">
+            <span role="img" aria-label="bot">🎓</span>
+          </div>
           <div className="loading-indicator">
             <div className="dot"></div>
             <div className="dot"></div>
