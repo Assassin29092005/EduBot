@@ -1,0 +1,124 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: EduBot — Serverless Student Assistant Chatbot
+
+Globals:
+  Function:
+    Timeout: 10
+    Runtime: python3.11
+    Tracing: Active
+
+Resources:
+  # DynamoDB Table
+  CoursesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: EduBot-Courses
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: course_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: course_id
+          KeyType: HASH
+
+  # Lambda Function
+  EduBotFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: EduBotHandler
+      CodeUri: backend/lambda/
+      Handler: handler.lambda_handler
+      MemorySize: 128
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref CoursesTable
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref CoursesTable
+        - CloudWatchLogsFullAccess
+
+  # Lambda Permission for Lex
+  LexInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref EduBotFunction
+      Action: lambda:InvokeFunction
+      Principal: lexv2.amazonaws.com
+
+  # S3 Bucket for Frontend
+  FrontendBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub 'edubot-frontend-${AWS::AccountId}'
+      WebsiteConfiguration:
+        IndexDocument: index.html
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+
+  FrontendBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref FrontendBucket
+      PolicyDocument:
+        Statement:
+          - Sid: PublicRead
+            Effect: Allow
+            Principal: '*'
+            Action: s3:GetObject
+            Resource: !Sub '${FrontendBucket.Arn}/*'
+
+  # Cognito Identity Pool (unauthenticated access to Lex)
+  EduBotIdentityPool:
+    Type: AWS::Cognito::IdentityPool
+    Properties:
+      IdentityPoolName: EduBotIdentityPool
+      AllowUnauthenticatedIdentities: true
+
+  # IAM Role for unauthenticated Cognito users
+  CognitoUnauthRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated: cognito-identity.amazonaws.com
+            Action: sts:AssumeRoleWithWebIdentity
+            Condition:
+              StringEquals:
+                cognito-identity.amazonaws.com:aud: !Ref EduBotIdentityPool
+              ForAnyValue:StringLike:
+                cognito-identity.amazonaws.com:amr: unauthenticated
+      Policies:
+        - PolicyName: LexAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - lex:RecognizeText
+                  - lex:DeleteSession
+                  - lex:PutSession
+                Resource: '*'
+
+  CognitoRoleAttachment:
+    Type: AWS::Cognito::IdentityPoolRoleAttachment
+    Properties:
+      IdentityPoolId: !Ref EduBotIdentityPool
+      Roles:
+        unauthenticated: !GetAtt CognitoUnauthRole.Arn
+
+Outputs:
+  FrontendURL:
+    Value: !GetAtt FrontendBucket.WebsiteURL
+  IdentityPoolId:
+    Value: !Ref EduBotIdentityPool
+  LambdaFunctionArn:
+    Value: !GetAtt EduBotFunction.Arn
+  CoursesTableName:
+    Value: !Ref CoursesTable

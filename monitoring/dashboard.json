@@ -1,0 +1,113 @@
+{
+  "widgets": [
+    {
+      "type": "text",
+      "x": 0,
+      "y": 0,
+      "width": 24,
+      "height": 1,
+      "properties": {
+        "markdown": "# EduBot Monitoring Dashboard"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 1,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          ["AWS/Lambda", "Invocations", "FunctionName", "EduBotHandler", { "stat": "Sum" }]
+        ],
+        "view": "timeSeries",
+        "region": "us-east-1",
+        "title": "Lambda Invocations",
+        "period": 300
+      }
+    },
+    {
+      "type": "metric",
+      "x": 12,
+      "y": 1,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          ["AWS/Lambda", "Errors", "FunctionName", "EduBotHandler", { "stat": "Sum" }]
+        ],
+        "view": "timeSeries",
+        "region": "us-east-1",
+        "title": "Lambda Errors",
+        "period": 300
+      }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 7,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          ["AWS/Lambda", "Duration", "FunctionName", "EduBotHandler", { "stat": "p50" }],
+          ["AWS/Lambda", "Duration", "FunctionName", "EduBotHandler", { "stat": "p90" }],
+          ["AWS/Lambda", "Duration", "FunctionName", "EduBotHandler", { "stat": "p99" }]
+        ],
+        "view": "timeSeries",
+        "region": "us-east-1",
+        "title": "Lambda Duration (p50 / p90 / p99)",
+        "period": 300
+      }
+    },
+    {
+      "type": "metric",
+      "x": 12,
+      "y": 7,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          ["AWS/DynamoDB", "ConsumedReadCapacityUnits", "TableName", "EduBot-Courses", { "stat": "Sum" }]
+        ],
+        "view": "timeSeries",
+        "region": "us-east-1",
+        "title": "DynamoDB Read Capacity Consumed",
+        "period": 300
+      }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 13,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          ["AWS/Lex", "MissedUtteranceCount", { "stat": "Sum" }],
+          ["AWS/Lex", "SuccessfulRequestLatency", { "stat": "Average" }]
+        ],
+        "view": "timeSeries",
+        "region": "us-east-1",
+        "title": "Lex Metrics",
+        "period": 300
+      }
+    },
+    {
+      "type": "metric",
+      "x": 12,
+      "y": 13,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          ["AWS/Lambda", "ConcurrentExecutions", "FunctionName", "EduBotHandler", { "stat": "Maximum" }]
+        ],
+        "view": "singleValue",
+        "region": "us-east-1",
+        "title": "Lambda Concurrent Executions",
+        "period": 300
+      }
+    }
+  ]
+}

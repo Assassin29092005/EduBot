@@ -1,0 +1,9 @@
+version = 0.1
+
+[default.deploy.parameters]
+stack_name = "edubot-stack"
+resolve_s3 = true
+s3_prefix = "edubot-stack"
+region = "us-east-1"
+capabilities = "CAPABILITY_IAM"
+confirm_changeset = false
