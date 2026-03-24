@@ -4,6 +4,11 @@ EduBot is a cloud-native, fully serverless chatbot that helps students query aca
 
 ## Architecture
 
+![EduBot Architecture](docs/architecture.svg)
+
+<details>
+<summary>Text-based diagram</summary>
+
 ```
 ┌──────────────┐    ┌──────────────┐    ┌──────────────────┐
 │  S3 + CF     │    │ Amazon       │    │ CloudWatch       │
@@ -21,7 +26,7 @@ EduBot is a cloud-native, fully serverless chatbot that helps students query aca
                ▼                                  │
 ┌──────────────────────────────────┐              │
 │         AWS Lambda               │──────────────┘
-│    (Python 3.12 — business logic)│
+│    (Python 3.11 — business logic)│
 └──────────────┬───────────────────┘
                │ queries
                ▼
@@ -30,6 +35,7 @@ EduBot is a cloud-native, fully serverless chatbot that helps students query aca
 │    (Courses table — key-value)   │
 └──────────────────────────────────┘
 ```
+</details>
 
 ## AWS Services Used
 
@@ -49,7 +55,7 @@ EduBot is a cloud-native, fully serverless chatbot that helps students query aca
 - [AWS CLI](https://aws.amazon.com/cli/) configured with credentials
 - [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)
 - [Node.js 20+](https://nodejs.org/)
-- [Python 3.12+](https://www.python.org/)
+- [Python 3.11+](https://www.python.org/)
 - GitHub account (for CI/CD)
 
 ## Project Structure
@@ -166,6 +172,18 @@ The dashboard includes:
 - DynamoDB consumed read capacity
 - Lex missed utterances and latency
 - Lambda concurrent executions
+
+## Screenshots
+
+| Chat Interface | Syllabus Query | Professor Info |
+|:-:|:-:|:-:|
+| ![Chat UI](docs/screenshots/chat-ui.png) | ![Syllabus](docs/screenshots/syllabus-query.png) | ![Professor](docs/screenshots/professor-query.png) |
+
+| AWS Lex Console | CloudWatch Dashboard | DynamoDB Table |
+|:-:|:-:|:-:|
+| ![Lex](docs/screenshots/lex-console.png) | ![Dashboard](docs/screenshots/cloudwatch-dashboard.png) | ![DynamoDB](docs/screenshots/dynamodb-table.png) |
+
+> **Note:** Add your own screenshots to `docs/screenshots/` to replace the placeholders above.
 
 ## Using the Chatbot
 
