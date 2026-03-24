@@ -40,6 +40,29 @@ body {
   margin-top: 2px;
 }
 
+.app-header {
+  position: relative;
+}
+
+.clear-history-btn {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.clear-history-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
 /* Chat Container */
 .chat-container {
   flex: 1;
