@@ -9,7 +9,7 @@
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     sans-serif;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  background: #1a1a2e;
   color: #1a202c;
   min-height: 100vh;
 }
@@ -26,11 +26,11 @@ body {
 /* ========== Header ========== */
 .app-header {
   position: relative;
-  background: linear-gradient(135deg, #1a56db 0%, #4f46e5 50%, #7c3aed 100%);
+  background: linear-gradient(135deg, #065f46, #047857, #059669);
   color: white;
   padding: 20px 24px;
   text-align: center;
-  box-shadow: 0 4px 20px rgba(26, 86, 219, 0.4);
+  box-shadow: 0 4px 20px rgba(6, 95, 70, 0.4);
   z-index: 10;
 }
 
@@ -41,7 +41,7 @@ body {
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #60a5fa, #a78bfa, #60a5fa);
+  background: linear-gradient(90deg, #34d399, #fbbf24, #34d399);
   background-size: 200% 100%;
   animation: shimmer 3s ease-in-out infinite;
 }
@@ -109,7 +109,7 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: #f8fafc;
+  background: #f9fafb;
 }
 
 /* ========== Chat Window ========== */
@@ -121,9 +121,9 @@ body {
   flex-direction: column;
   gap: 16px;
   background:
-    radial-gradient(circle at 20% 80%, rgba(79, 70, 229, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
-    #f8fafc;
+    radial-gradient(circle at 20% 80%, rgba(5, 150, 105, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(251, 191, 36, 0.02) 0%, transparent 50%),
+    #f9fafb;
 }
 
 /* Scrollbar styling */
@@ -175,13 +175,13 @@ body {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  background: linear-gradient(135deg, #065f46, #059669);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.9rem;
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
+  box-shadow: 0 2px 8px rgba(6, 95, 70, 0.3);
 }
 
 .message-bubble {
@@ -196,10 +196,10 @@ body {
 }
 
 .message-bubble.user {
-  background: linear-gradient(135deg, #1a56db, #4f46e5);
+  background: linear-gradient(135deg, #065f46, #047857);
   color: white;
   border-bottom-right-radius: 4px;
-  box-shadow: 0 2px 12px rgba(26, 86, 219, 0.25);
+  box-shadow: 0 2px 12px rgba(6, 95, 70, 0.25);
 }
 
 .message-bubble.bot {
@@ -207,7 +207,7 @@ body {
   color: #334155;
   border-bottom-left-radius: 4px;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e5e7eb;
 }
 
 .message-timestamp {
@@ -231,13 +231,13 @@ body {
   border-bottom-left-radius: 4px;
   width: fit-content;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e5e7eb;
 }
 
 .loading-indicator .dot {
   width: 9px;
   height: 9px;
-  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  background: #059669;
   border-radius: 50%;
   animation: bounce 1.4s infinite ease-in-out both;
 }
@@ -267,13 +267,13 @@ body {
   flex-wrap: wrap;
   gap: 8px;
   padding: 12px 20px 4px;
-  background: #f8fafc;
+  background: #f9fafb;
 }
 
 .quick-action-btn {
   background: white;
-  color: #4f46e5;
-  border: 1.5px solid #e0e7ff;
+  color: #065f46;
+  border: 1.5px solid #d1fae5;
   padding: 7px 14px;
   border-radius: 20px;
   font-size: 0.78rem;
@@ -284,10 +284,10 @@ body {
 }
 
 .quick-action-btn:hover {
-  background: #eef2ff;
-  border-color: #a5b4fc;
+  background: #ecfdf5;
+  border-color: #6ee7b7;
   transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.12);
+  box-shadow: 0 2px 8px rgba(6, 95, 70, 0.12);
 }
 
 /* ========== Chat Input ========== */
@@ -296,26 +296,26 @@ body {
   gap: 10px;
   padding: 16px 20px 20px;
   background: white;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid #e5e7eb;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.03);
 }
 
 .chat-input input {
   flex: 1;
   padding: 12px 20px;
-  border: 2px solid #e2e8f0;
+  border: 2px solid #e5e7eb;
   border-radius: 24px;
   font-size: 0.9rem;
   font-family: inherit;
   outline: none;
   transition: all 0.3s ease;
-  background: #f8fafc;
+  background: #f9fafb;
 }
 
 .chat-input input:focus {
-  border-color: #4f46e5;
+  border-color: #059669;
   background: white;
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
 }
 
 .chat-input input::placeholder {
@@ -324,7 +324,7 @@ body {
 
 .chat-input button {
   padding: 12px 24px;
-  background: linear-gradient(135deg, #1a56db, #4f46e5);
+  background: linear-gradient(135deg, #065f46, #047857);
   color: white;
   border: none;
   border-radius: 24px;
@@ -333,13 +333,13 @@ body {
   font-family: inherit;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 10px rgba(26, 86, 219, 0.3);
+  box-shadow: 0 2px 10px rgba(6, 95, 70, 0.3);
 }
 
 .chat-input button:hover:not(:disabled) {
-  background: linear-gradient(135deg, #1e3a8a, #4338ca);
+  background: linear-gradient(135deg, #064e3b, #065f46);
   transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(26, 86, 219, 0.4);
+  box-shadow: 0 4px 15px rgba(6, 95, 70, 0.4);
 }
 
 .chat-input button:active:not(:disabled) {
@@ -347,7 +347,8 @@ body {
 }
 
 .chat-input button:disabled {
-  background: linear-gradient(135deg, #93c5fd, #a5b4fc);
+  background: linear-gradient(135deg, #6ee7b7, #a7f3d0);
+  color: rgba(255, 255, 255, 0.8);
   cursor: not-allowed;
   box-shadow: none;
 }
